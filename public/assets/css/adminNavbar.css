@@ -1,0 +1,70 @@
+.sideBar{
+    background-color: rgba(114, 114, 114, 0.5);
+    backdrop-filter: blur(15px);
+    width: 290px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    overflow-y: auto;
+    transition: .6s ease;
+    transition-property: left;
+    z-index: 999;
+}
+
+.sideBar.active{
+left: 0;
+}
+
+.menuBtn{
+    position: absolute;
+    margin: 25px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sideBar .menu{
+    width: 100%;
+    margin-top: 80px;
+}
+
+.sideBar .menu .item{
+    position: relative;
+    cursor: pointer;
+}
+
+.sideBar .menu .item a{
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    padding: 5px 30px;
+    line-height: 60px;
+}
+.sideBar .menu .item a:hover{
+    background-color: burlywood;
+    transition: .3s ease;
+}
+.sideBar .menu .item i{
+    margin-right: 15px; 
+}
+.sideBar .menu .item a .dropdown{
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    transition:  .3s ease;
+}
+.sideBar .menu .item .subMenu{
+    background: rgb(110, 110, 110);
+    display: none;
+}
+.rotate{
+    transform: rotate(90deg);
+}
+.closeBtn{
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    right: 0;
+    margin: 25px;
+    cursor: pointer;
+}

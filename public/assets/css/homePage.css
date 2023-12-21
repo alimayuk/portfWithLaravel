@@ -1,0 +1,222 @@
+.hero {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.618),
+        rgba(0, 0, 0, 0.9)
+    );
+    z-index: 1;
+}
+.hero .container {
+    z-index: 2;
+}
+.hero h1 {
+    font-size: 72px;
+    font-weight: 100;
+}
+.hero .heroSoftText {
+    color: grey;
+}
+.hero h1 .dash {
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+.hero .textt {
+    position: relative;
+    color: #007bff;
+}
+.hero .textt:before {
+    content: "";
+    height: 30px;
+    width: 2px;
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    background: #007bff;
+    transform: translateY(-45%);
+    animation: blink 0.7s infinite;
+}
+h1 span.stop-blinking::before {
+    animation: none;
+}
+.hero .heroScrollMouse {
+    position: absolute;
+    bottom: 60px;
+    font-size: 30px;
+    display: flex;
+    gap: 5px;
+    z-index: 3;
+    animation: moveUpDown 2s ease-in infinite;
+}
+/*features*/
+.features {
+    padding: 100px 10px;
+    background-color: #101828;
+}
+.features .featureCardList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.featureCard {
+    border-radius: 10px;
+    flex: 1 1 500px;
+    min-width: 300px;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+.featureCard .featureCardName {
+    font-size: 23px;
+    font-weight: 500;
+    color: white;
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    transition: transform 0.2s;
+    max-width: 100%;
+    word-break: break-all;
+    margin-right: 20px;
+    
+}
+.featureCard .featureCardImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.2s;
+}
+.featureCard:hover .featureCardImage {
+    transform: scale(1.3) rotate(3deg);
+}
+.featureCard:hover .featureCardName {
+    transform: translateY(-35px);
+}
+.featureCard:hover .featureMore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    border-radius: 5px;
+}
+.featureMore {
+    display: none;
+    color: #007bff;
+    font-weight: 800;
+    font-size: 18px;
+    background-color: white;
+    padding: 3px 7px;
+}
+.featureCard .cardCatTitle{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background-color: black;
+    color:white;
+    padding: 5px 30px;
+    border-radius: 15px;
+}
+/*features end*/
+
+/*categories*/
+.categories {
+    padding: 0 10px 100px;
+    background-color: #101828;
+}
+.categories .categoryCardWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-around;
+}
+.categories .categoryCard{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: auto;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 20px 0;
+}
+.categoryCard h3{
+    font-size: 25px;
+    text-transform: capitalize;
+}
+.categories .categoryCard img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+/*categories end*/
+
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+@keyframes moveUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(15px);
+    }
+}
+
+@media (max-width: 900px) {
+    .hero h1 {
+        font-size: 64px;
+    }
+}
+@media (max-width: 868px) {
+    .hero h1 {
+        font-size: 54px;
+    }
+}
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+@media (max-width: 380px) {
+    .navbar .logo a {
+        font-size: 25px;
+    }
+}

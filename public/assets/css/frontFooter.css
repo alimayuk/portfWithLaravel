@@ -1,0 +1,146 @@
+footer{
+    background-color: #101828;
+    padding: 100px 5px 10px;
+}
+
+footer .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+footer .footerTop{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+}
+
+footer .footerTop h3{
+    font-size: 42px;
+    font-weight: 500;
+}
+
+footer .footerTop .footerDesc{
+    text-align: center;
+    color: grey;
+}
+
+footer input{
+    border: 1px solid black;
+    background-color: transparent;
+    outline: none;
+    border-radius: 50px;
+    padding: 15px 15px;
+    font-size: 20px;
+    color: white;
+    box-shadow: rgba(255, 255, 255, 0.489) 1.95px 1.95px 2.6px;
+}
+
+footer form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+footer .footerTop button{
+    background-color: transparent;
+    color: white;
+    padding: 17px 55px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: rgba(254, 254, 254, 0.507) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(218, 218, 218, 0.616) 0px -3px 0px inset;
+    cursor: pointer;
+    transition: all .5s ease ;
+}
+
+footer .footerTop button:hover{
+    box-shadow:rgba(218, 218, 218, 0.616) 0px -3px 0px , rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(254, 254, 254, 0.507) 0px 2px 4px  inset;
+}
+footer .termtext{
+    font-size: 12px;
+    color: grey;
+}
+footer .termtext a{
+    color: white;
+    text-decoration: underline;
+}
+footer .footerMid{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+    padding: 80px 10px;
+    border-bottom: 1px solid grey;
+}
+footer .footerMid .fm-left a{
+    color: white;
+    font-size: 25px
+}
+footer .footerMid .fm-mid ul{
+    display: flex;
+    gap: 25px;
+    color: grey;
+}
+
+footer .footerMid .fm-mid ul a{
+    color: white;
+    font-size: 16px;
+}
+footer .footerMid .fm-right ul a{
+    color: white;
+    font-size: 20px;
+}
+footer .footerMid .fm-right ul{
+    display: flex;
+    gap: 25px;
+    color: grey;
+}
+.footerBot{
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+    padding: 50px 0px;
+}
+.footerBot a{
+    color: white;
+    text-decoration: underline;
+}
+
+@media (max-width: 868px) {
+    footer .footerTop{
+        text-align: center;
+
+    }
+    footer form{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    footer form input,button{
+            width: 100%;
+    }
+    footer .footerMid{
+        flex-direction: column;
+        gap: 50px;
+    }
+    footer .footerMid .fm-mid ul{
+        flex-direction: column;
+    }
+  }
+
+  @media (max-width:380px) {
+    footer .footerMid{
+        flex-direction: column;
+    }
+  }
+
+
+
+
+
+
+  

@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+.sectionTitleWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding:  0  0 50px 0;
+}
+.sectionTitle{
+    color: white;
+    font-size: 35px;
+}
+.lineSeparator {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(254, 254, 255, .3);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.aosHiddenBottom,
+.aosHiddenLeft,
+.aosHiddenRight {
+    opacity: 0;
+}
+.aosShow {
+    opacity: 1;
+}
+@keyframes LeftToMid {
+    0% {
+        filter: blur(5px);
+        transform: translateX(-100%);
+        transition: all ease 1s;
+    }
+    100% {
+        filter: blur(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveFrom {
+    0% {
+        filter: blur(5px);
+        transform: translateX(var(--start));
+        transition: all ease 1s;
+    }
+    100% {
+        filter: blur(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes bottomToUp {
+    from {
+        filter: blur(5px);
+        transform: translateY(100%);
+        transition: all ease 1s;
+    }
+    to {
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+.LeftToMid {
+    animation: moveFrom 1s ease normal;
+    --start: -100%;
+}
+
+.RightToMid {
+    animation: moveFrom 1s ease normal;
+    --start: 100%;
+}
+
+.bottomToUp {
+    animation: bottomToUp 1s ease normal;
+}
+
+
+
+@media (min-width:1024px) {
+    *{
+        cursor: none !important;
+    }
+    .customCursorDot{
+        width: 5px;
+        height: 5px;
+        background-color: white;
+    }
+    .customCursorOurline{
+        width: 30px;
+        height: 30px;
+        border: 2px solid grey;
+    }
+    
+    .customCursorOurline, .customCursorDot{
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999999; /* Diğer öğelerin üzerinde görünmesi için */
+        pointer-events: none; /* Öğelerin tıklanabilirliğini korumak için */
+    }
+}
+
