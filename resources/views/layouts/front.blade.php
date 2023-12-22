@@ -14,9 +14,10 @@
 </head>
 
 <body>
-    @include('layouts.frontLayout.navbar')
     <div class="customCursorDot"></div>
     <div class="customCursorOurline"></div>
+    @include('layouts.frontLayout.navbar')
+    
 
     @yield('content')
 
@@ -26,8 +27,10 @@
 
     <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script src="{{ asset('assets/js/customFade.js') }}"></script>
+    <script src="{{ asset('assets/js/customCursor.js') }}"></script>
     @include('sweetalert::alert')
-    @yield('js')
+  
 </body>
 
 </html>

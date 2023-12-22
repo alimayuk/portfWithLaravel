@@ -160,6 +160,24 @@ class ArticleController extends Controller
         return redirect()->back();
     }
 
+    public function delete(Request $request)
+    {
+        $request->validate(['id' => ["required", "integer"]]);
+        $articleID = $request->id;
+        $article = Article::where('id', $articleID)->first();
+
+        if (!is_null($article->image)) {
+
+            // resimin kaldırılması
+            if (file_exists(public_path($article->image))) {
+                File::delete(public_path($article->image));
+            }
+        }
+        $article->delete();
+        alert('Başarılı', 'Silme İşlemi Başarılı', 'success');
+        return redirect()->back();
+    }
+
     public function slugCheck(string $text)
     {
         return Article::where("slug", $text)->first();

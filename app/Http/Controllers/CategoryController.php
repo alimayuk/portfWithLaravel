@@ -34,6 +34,13 @@ class CategoryController extends Controller
         $request->validate(['id' => ["required", "integer"]]);
         $categoryID = $request->id;
         $category = Category::where('id', $categoryID)->first();
+        if (!is_null($category->image)) {
+
+            // resimin kaldırılması
+            if (file_exists(public_path($category->image))) {
+                File::delete(public_path($category->image));
+            }
+        }
         $category->delete();
         alert('Başarılı', 'Silme İşlemi Başarılı', 'success');
         return redirect()->back();

@@ -42,7 +42,7 @@
                                 <td>{{ $category->seo_keywords }}</td>
                                 <td>{{ substr($category->seo_description, 0, 25) }}...</td>
                                 <td>{{ substr($category->description, 0, 25) }}...</td>
-                                <td>{{ $category->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::parse($category->created_at)->format("d-m-Y") }}</td>
                                 <td class="editColumn">
                                     <a href="{{ route('category.edit',['id' => $category->id]) }}" class="btn"><i class="far fa-edit"></i></a>
                                     <a data-id="{{ $category->id }}" href="javascript:void(0)" class="btnDelete"><i class="fas fa-trash-alt"></i></a>
@@ -97,7 +97,6 @@
                     if (result.isConfirmed) {
                         $('#statusChangeForm').attr('action', "{{ route('category.delete') }}");
                         $('#statusChangeForm').submit();
-                        Swal.fire("Başarıyla Silindi!", "", "success");
                     }
                 });
             });

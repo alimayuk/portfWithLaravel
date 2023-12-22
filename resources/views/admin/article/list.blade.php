@@ -20,8 +20,8 @@
                             <th>Anasayfada Görünürlük</th>
                             <th>SEO Kelimeleri</th>
                             <th>SEO Açıklaması</th>
-                            <th>Okunma Süresi</th>
                             <th>Açıklama</th>
+                            <th>Okunma Süresi</th>
                             <th>Oluşturma Tarihi</th>
                             <th>Ayarlar</th>
                         </tr>
@@ -53,11 +53,11 @@
                                     @endif
 
                                 </td>
-                                <td>{{ $article->seo_keywords ?? "boş"}}</td>
-                                <td>{{ substr($article->seo_description, 0, 25) }}...</td>
+                                <td>{{ substr($article->seo_keywords, 0, 10) ?? "boş"}}</td>
+                                <td>{{ substr($article->seo_description, 0, 10) }}...</td>
                                 <td>{{ substr($article->description, 0, 25) }}...</td>
                                 <td>{{ $article->read_time }}</td>
-                                <td>{{ $article->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::parse($article->created_at)->format("d-m-Y") }}</td>
                                 <td class="editColumn">
                                     <a href="{{ route('article.edit', ['id' => $article->id]) }}" class="btn"><i
                                             class="far fa-edit"></i></a>
@@ -133,7 +133,7 @@
                     cancelButtonText: "Çıkış"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $('#statusChangeForm').attr('action', "{{ route('category.delete') }}");
+                        $('#statusChangeForm').attr('action', "{{ route('article.delete') }}");
                         $('#statusChangeForm').submit();
                         Swal.fire("Başarıyla Silindi!", "", "success");
                     }

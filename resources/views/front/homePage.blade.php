@@ -18,27 +18,27 @@
             <i class="fas fa-long-arrow-alt-down"></i>
         </div>
     </div>
-    <section class="features">
-        <div class="container">
-            <x-headTitleLine>
-                <x-slot name="headTitleLine">Featured</x-slot>
-            </x-headTitleLine>
-           <div class="featureCardList">
-            <x-feature-comp class="featureCard aosHiddenLeft hParent">
-                <x-slot name="cardCatTitle">Teknddoloji</x-slot>
-                <x-slot name="title">Post</x-slot>
-            </x-feature-comp>
-            <x-feature-comp class="featureCard aosHiddenRight">
-                <x-slot name="cardCatTitle">s</x-slot>
-                <x-slot name="title">Boğa Piayasasının Yükselmesi Ve Düşüler</x-slot>
-            </x-feature-comp>
-            <x-feature-comp class="featureCard aosHiddenLeft">
-                <x-slot name="cardCatTitle">dsa</x-slot>
-                <x-slot name="title">Post</x-slot>
-            </x-feature-comp>
-           </div>
-        </div>
-    </section>
-    @include("components.categoriesAllComp")
-    
+    @if (isset($settings) && $settings->feature_cat_is_active)
+       
+        <section class="features">
+            <div class="container">
+                <x-headTitleLine>
+                    <x-slot name="headTitleLine">Öne Çıkanlar</x-slot>
+                </x-headTitleLine>
+                
+                <div class="featureCardList">
+                    @foreach ($articles as $item )
+                    <x-feature-comp class="featureCard aosHiddenLeft hParent">
+                        <x-slot name="cardCatTitle">{!! $item->category->title !!}</x-slot>
+                        <x-slot name="title">{!! $item->title !!}</x-slot>
+                        <x-slot name="articleSlug">{{ $item->slug }}</x-slot>
+                        <x-slot name="categorySlug">{{ $item->category->slug }}</x-slot>
+                    </x-feature-comp>
+                    @endforeach
+                </div>
+                
+            </div>
+        </section>
+    @endif
+    @include('components.categoriesAllComp')
 @endsection

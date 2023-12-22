@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreateSettingsController;
+use App\Http\Controllers\Front\FrontController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -18,9 +19,10 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 
-Route::get('/', function () {
-    return view('front.homePage');
-});
+Route::get('/', [FrontController::class,'home'])->name('home');
+Route::get('/categories', [FrontController::class,"pageCategory"])->name("page.category");
+Route::get('/categories/{slug:categories}', [FrontController::class,"category"])->name("front.category");
+Route::get('categories/{categorySlug}/{articleSlug}', [FrontController::class,"articleDetail"])->name("front.articleDetail");
 
 Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("/", function () {
@@ -36,6 +38,7 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     ->whereNumber('id');
     Route::post("article/{id}/edit",[ArticleController::class,"update"])
     ->whereNumber('id');
+    Route::post('article/delete',[ArticleController::class,"delete"])->name("article.delete");
 
     Route::get("categories",[CategoryController::class,"index"])->name("category.index");
     Route::post("categories/change-status",[CategoryController::class,"changeStatus"])->name("category.changeStatus");

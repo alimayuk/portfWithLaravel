@@ -52,6 +52,10 @@
                 @endif
             </div>
             <div class="formItem">
+                <label for="title">Okunma Süresi</label>
+                <input type="number" required id="read_time" name="read_time" value="{{ isset($article) ? $article->read_time : "" }}">
+            </div>
+            <div class="formItem">
                 <label for="feature_status">Anasayfada görünsün mü ?</label>
                 <input class="formCheckbox" type="checkbox" value="1" id="feature_status" name="feature_status"
                     {{ isset($article) && $article->feature_status ? 'checked' : '' }}>

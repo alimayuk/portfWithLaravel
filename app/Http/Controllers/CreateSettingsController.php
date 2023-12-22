@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingsRequest;
 use App\Models\create_settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,7 +15,7 @@ class CreateSettingsController extends Controller
         $settings = create_settings::first();
         return view("admin.settings.update", compact("settings"));
     }
-    public function update(Request $request)
+    public function update(SettingsRequest $request)
     {
         $settings = create_settings::first();
 
