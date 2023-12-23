@@ -24,10 +24,10 @@ class CategoryStore extends FormRequest
         return [
            "title"=> ["required","max:255"],
            "slug"=> ["max:255"],
-           "description"=>["max:255"],
+           "description"=>["max:600"],
            "seo_keywords"=>["max:255"],
            "seo_description"=>["max:255"],
-           "image" =>["image","mimetypes:image/jpeg,image/png,image/jpg","max:2048","nullable"],
+           "image" =>["image","mimetypes:image/jpeg,image/png,image/jpg,image/webp","max:2048","nullable"],
         ];
     }
 
@@ -35,7 +35,7 @@ class CategoryStore extends FormRequest
         return [
             "title.required"=> "kategori adı koymak zorunludur",
             "title.max"=> "Kategori adı en fazla 255 karakter koymak zorunludur",
-            "description.max"=> "description en fazla 255 karakter koymak zorunludur",
+            "description.max"=> "description en fazla 600 karakter koymak zorunludur",
             "seo_keywords.max"=> "seo_keywords en fazla 255 karakter koymak zorunludur",
             "seo_description.max"=> "seo_descriptionen fazla 255 karakter koymak zorunludur",
         ];

@@ -135,7 +135,6 @@
                     if (result.isConfirmed) {
                         $('#statusChangeForm').attr('action', "{{ route('article.delete') }}");
                         $('#statusChangeForm').submit();
-                        Swal.fire("Başarıyla Silindi!", "", "success");
                     }
                 });
             });
