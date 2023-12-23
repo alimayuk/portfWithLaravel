@@ -41,7 +41,6 @@ class FrontController extends Controller
       }
       return view("front.catArticleListPage", compact("articles", "category", "settings"));
    }
-
    public function articleDetail(Request $request, string $categorySlug, string $articleSlug ){
       
       $settings = create_settings::first();
@@ -50,5 +49,22 @@ class FrontController extends Controller
          abort(404);
       }
       return view("front.articleDetail", compact("settings","articles"));  
+   }
+
+   public function articles(Request $request){
+      $settings = create_settings::first();
+      $articles = Article::query()->where("status",1)->with(["category:id,slug","user:id"])->get();
+
+      return view("front.blogPage", compact("settings","articles"));
+   }
+
+   public function about(Request $request){
+      $settings = create_settings::first();
+      return view("front.aboutPage", compact("settings"));
+   }
+
+   public function contact(Request $request){
+      $settings = create_settings::first();
+      return view("front.contactPage", compact("settings"));
    }
 }

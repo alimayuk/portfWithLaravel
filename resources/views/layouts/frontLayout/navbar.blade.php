@@ -8,10 +8,10 @@
                 <i class="fas fa-times"></i>
             </div>
             <li><a href="{{ route('home') }}">Anasayfa</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="{{ route('front.blogPage') }}">Blog</a></li>
             <li><a href="{{ route('page.category') }}">Kategoriler</a></li>
-            <li><a href="#">Hakkımda</a></li>
-            <li><a href="#">İletişim</a></li>
+            <li><a href="{{ route('page.about') }}">Hakkımızda</a></li>
+            <li><a href="{{ route('page.contact') }}">İletişim</a></li>
         </ul>
         <a href="#" class="subscribe">
             Abone Ol

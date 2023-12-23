@@ -99,6 +99,5 @@
                 {{-- {{ $articles->links() }} --}}
             </div>
         </div>
-        
     </div>
 @endsection

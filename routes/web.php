@@ -22,6 +22,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 Route::get('/', [FrontController::class,'home'])->name('home');
 Route::get('/categories', [FrontController::class,"pageCategory"])->name("page.category");
 Route::get('/categories/{slug:categories}', [FrontController::class,"category"])->name("front.category");
+Route::get('/blogs', [FrontController::class,"articles"])->name("front.blogPage");
+Route::get('/about', [FrontController::class,"about"])->name("page.about");
+Route::get('/contact', [FrontController::class,"contact"])->name("page.contact");
 Route::get('categories/{categorySlug}/{articleSlug}', [FrontController::class,"articleDetail"])->name("front.articleDetail");
 
 Route::prefix('admin')->middleware("auth")->group(function () {
