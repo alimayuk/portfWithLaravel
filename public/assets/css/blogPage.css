@@ -1,0 +1,66 @@
+    .blogPage{
+        background-color: #101828;
+    }
+    .blogPage .container{
+        padding: 100px 10px 0;
+    }
+    .blogPage h1{
+        text-align: left;
+        margin-bottom: 30px;
+        color: white;
+        text-transform: capitalize;
+    }
+    .blogPage .cardsWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 50px;
+    }
+    .blogPage .blogCard{
+        width: 300px;
+        min-height: max-content;
+        word-wrap: break-word;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        color: white;
+        border: 1px solid white
+    }
+    .blogPage .blogCard .cardHead{
+        width: 100%;
+        height: 200px;
+    }
+    .blogPage .blogCard img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .blogPage .blogCard .cardBody{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px 30px
+    }
+    .blogCard .cardBottom{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        align-self: center;
+        margin-bottom: 20px;
+    }
+    .blogCard .cardBottom a{
+        border: none;
+        background-color: #057EFF;
+        padding: 8px 25px;
+        border-radius: 5px;
+        color: white;
+    }
+    .blogCard .readTime{
+   
+        color: grey
+    }
+    footer {
+        padding: 80px 5px 10px
+    }

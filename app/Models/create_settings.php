@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class create_settings extends Model
 {
-    
+    protected $guarded = ["id", "created_at","updated_at"];
 }

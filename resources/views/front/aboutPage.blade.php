@@ -3,18 +3,7 @@
     Hakkımızda
 @endsection
 @section('css')
-    <style>
-        .aboutPage{
-            background-color: #101828;
-        }
-        .aboutPage .container{
-            padding: 100px 10px 10px;
-            color:white;
-        }
-        .aboutPage .container h1{
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/aboutPage.css') }}">
 @endsection
 @section('content')
     <div class="aboutPage">

@@ -1,0 +1,10 @@
+        .aboutPage{
+            background-color: #101828;
+        }
+        .aboutPage .container{
+            padding: 100px 10px 10px;
+            color:white;
+        }
+        .aboutPage .container h1{
+            text-align: center;
+        }
