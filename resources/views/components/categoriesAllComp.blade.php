@@ -6,7 +6,7 @@
      <div class="categoryCardWrapper">
         @foreach ($categories as $category )
         <a href="{{ route('front.category',['slug' => $category->slug]) }}" class="categoryCard">
-            <img src="{{ asset("$category->image") }}" alt="">
+            <img src="{{ isset($category->image) ? asset("$category->image") : asset("$settings->category_default_image")  }}" alt="">
             <h3 class="categoryCardTitle">{{ $category->title }}</h3>
         </a>
         @endforeach
