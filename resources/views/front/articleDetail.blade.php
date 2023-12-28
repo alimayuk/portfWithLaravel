@@ -9,7 +9,7 @@
    <div class="blogDetail">
     <div class="container">
         <div class="imagewrapper">
-            <img class="blogImage" src={{ asset($articles->image) }} alt="">
+           <img class="blogImage" src="{{ isset($articles->image) ? asset("$articles->image") : asset("$settings->article_default_image")  }}" alt="">
         </div>
         <div class="timeAndCat">
             <p>{{ $articles->category->title }}</p>

@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="content">
         <div class="logo">
-            <a href="#">{!! isset($settings) ? $settings->logo : "Web SoftWare" !!}</a>
+            <a href="{{ route('home') }}">{!! isset($settings) ? $settings->logo : "Web SoftWare" !!}</a>
         </div>
         <ul class="menu-list">
             <div class="icon cancel-btn">
