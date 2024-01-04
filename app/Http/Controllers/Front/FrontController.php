@@ -45,9 +45,19 @@ class FrontController extends Controller
       
       $settings = create_settings::first();
       $articles = Article::query()->where( 'slug', $articleSlug)->with(["category:id,title,slug", "user:id"])->firstOrFail();
+      $visitedArticles = $request->session()->get('visited_articles', []);
+      if (!in_array($articles->id, $visitedArticles)) {
+         $articles->increment('view_count');
+         $articles->save();
+
+         $visitedArticles[] = $articles->id;
+         $request->session()->put('visited_articles', $visitedArticles);
+     }
+
       if ($articles->category->slug != $categorySlug)  {
          abort(404);
       }
+
       return view("front.articleDetail", compact("settings","articles"));  
    }
 
