@@ -30,6 +30,7 @@
     <script src="{{ asset('assets/js/customFade.js') }}"></script>
     <script src="{{ asset('assets/js/customCursor.js') }}"></script>
     @include('sweetalert::alert')
+    @yield('js')
   
 </body>
 

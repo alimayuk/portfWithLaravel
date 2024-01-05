@@ -44,6 +44,14 @@
                 </div>
             </div>
             <div class="item">
+                <a class="subBtn"><i class="fas fa-ellipsis-v"></i></i>Galeri <i
+                        class="fas fa-arrow-right dropdown"></i></a>
+                <div class="subMenu">
+                    <a href="{{ route('gallery.index') }}" class="subItem">Görsel Listesi</a>
+                    <a href="{{ route('gallery.create') }}" class="subItem">Görsel Yükle</a>
+                </div>
+            </div>
+            <div class="item">
                 <a href="{{ route('settings') }}"><i class="fas fa-cog"></i>Ayarlar</a>
             </div>
             <div class="item">

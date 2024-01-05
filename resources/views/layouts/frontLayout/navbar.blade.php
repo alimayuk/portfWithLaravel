@@ -11,6 +11,7 @@
             <li><a href="{{ route('front.blogPage') }}">Blog</a></li>
             <li><a href="{{ route('page.category') }}">Kategoriler</a></li>
             <li><a href="{{ route('page.about') }}">Hakkımızda</a></li>
+            <li><a href="{{ route('front.gallery') }}">Galeri</a></li>
             <li><a href="{{ route('page.contact') }}">İletişim</a></li>
         </ul>
         <a href="#" class="subscribe">

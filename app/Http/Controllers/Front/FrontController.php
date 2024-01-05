@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\create_settings;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -76,5 +77,11 @@ class FrontController extends Controller
    public function contact(Request $request){
       $settings = create_settings::first();
       return view("front.contactPage", compact("settings"));
+   }
+   public function gallery(Request $request){
+      $settings = create_settings::first();
+      $gallery = Gallery::all();
+
+      return view("front.gallery", compact("settings","gallery"));
    }
 }

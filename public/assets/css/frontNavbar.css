@@ -21,10 +21,9 @@
 .navbar{
   position: fixed;
   width: 100%;
-  z-index: 2;
   padding: 25px 0;
   transition: all 0.3s ease;
-  z-index: 99999;
+  z-index: 99;
 }
 .navbar.sticky{
   background: #1b1b1b;

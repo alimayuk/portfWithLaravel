@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreateSettingsController;
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -26,6 +27,7 @@ Route::get('/blogs', [FrontController::class,"articles"])->name("front.blogPage"
 Route::get('/about', [FrontController::class,"about"])->name("page.about");
 Route::get('/contact', [FrontController::class,"contact"])->name("page.contact");
 Route::get('categories/{categorySlug}/{articleSlug}', [FrontController::class,"articleDetail"])->name("front.articleDetail");
+Route::get('/gallery', [FrontController::class,"gallery"])->name("front.gallery");
 
 Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("/", function () {
@@ -52,10 +54,15 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     Route::post("categories/{id}/edit",[CategoryController::class,"update"])->whereNumber('id');
     Route::post('categories/delete',[CategoryController::class,"delete"])->name("category.delete");
 
+    Route::get("gallery/list",[GalleryController::class,"index"])->name("gallery.index");
+    Route::get("gallery/create",[GalleryController::class,"create"])->name("gallery.create");
+    Route::post('gallery/create',[GalleryController::class,"store"]);
+    Route::post('gallery/{id}/edit',[GalleryController::class,"update"])->name('gallery.edit')->whereNumber('id');
+    Route::post('gallery/delete',[GalleryController::class,"delete"])->name("gallery.delete");
+
 
     Route::get("settings",[CreateSettingsController::class,"show"])->name("settings");
     Route::post("settings",[CreateSettingsController::class,"update"]);
-
 });
 
 Route::get("login",[LoginController::class,"showLogin"])->name("login");
