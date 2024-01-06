@@ -30,7 +30,7 @@
                         @foreach ($articles as $article)
                             <tr>
 
-                                <td><img class="listImg" src="{{ asset($article->image) }}" alt=""></td>
+                                <td><img class="listImg" src="{{ isset($article->image) ? asset($article->image) : asset($settings->article_default_image) }}" alt=""></td>
                                 <td>{{ substr($article->title, 0, 10) }}..</td>
                                 <td>{{ $article->category->title }}</td>
                                 <td>
@@ -53,8 +53,8 @@
                                     @endif
 
                                 </td>
-                                <td>{{ substr($article->seo_keywords, 0, 10) ?? "boş"}}</td>
-                                <td>{{ substr($article->seo_description, 0, 10) }}...</td>
+                                <td>{{ isset($article->seo_keywords) ? substr($article->seo_keywords, 0, 10) : "boş"}}</td>
+                                <td>{!! substr($article->seo_description, 0, 10) !!}...</td>
                                 <td>{{ substr($article->description, 0, 25) }}...</td>
                                 <td>{{ $article->read_time }}</td>
                                 <td>{{ \Carbon\Carbon::parse($article->created_at)->format("d-m-Y") }}</td>

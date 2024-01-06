@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\create_settings;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -16,7 +18,8 @@ class ArticleController extends Controller
         $categories = Category::all();
         $users = User::all();
         $articles = Article::all()->reverse();
-        return view("admin.article.list",compact("articles","categories","users"));
+        $settings = create_settings::first();
+        return view("admin.article.list",compact("articles","categories","users","settings"));
     }
     public function create(){
         $categories = Category::all();

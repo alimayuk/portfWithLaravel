@@ -35,16 +35,37 @@
         .custom-f-btn svg path {
             fill: red;
         }
-        .adminImgCard{
+
+        .adminImgCard {
             display: flex;
             flex-direction: column;
             gap: 5px;
         }
-        .adminImgCard button{
+
+        .galleryButtons {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .galleryButtons a {
+            flex: 1;
+            text-align: center;
+        }
+
+        .adminImgCard .btnDelete {
             color: white;
             font-weight: bold;
             border: none;
             background-color: red;
+        }
+
+        .adminImgCard .btnUpdate {
+            background-color: orange;
+            border: none;
+            color: white;
+            font-weight: bold;
         }
     </style>
 @endsection
@@ -54,13 +75,14 @@
         <h2 class="formTitle">Görsel Listesi</h2>
         <div class="container">
             @foreach ($gallery as $item)
-            
                 <div class="adminImgCard">
                     <a data-caption="{{ $item->title }}" data-fancybox="gallery" data-src="{{ asset($item->image_path) }}">
                         <img class="littleImg" src="{{ asset($item->image_path) }}" />
                     </a>
-                    <button id="REALDELETE"  data-id="{{ $item->id }}" href="javascript:void(0)"
-                        class="btnDelete">Sil</button>
+                    <div class="galleryButtons">
+                        <a href="{{ route('gallery.edit', ['id' => $item->id]) }}" class="btnUpdate">Güncelle</a>
+                        <a id="REALDELETE" data-id="{{ $item->id }}" href="javascript:void(0)" class="btnDelete">Sil</a>
+                    </div>
                 </div>
             @endforeach
 
@@ -94,7 +116,7 @@
                     left: ["infobar"],
                     middle: [],
                     //"facebook",
-                    right: [ "iterateZoom", "slideshow", "fullscreen", "thumbs", "close"],
+                    right: ["iterateZoom", "slideshow", "fullscreen", "thumbs", "close"],
                 },
             },
         });

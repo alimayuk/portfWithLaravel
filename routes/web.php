@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreateSettingsController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\StatController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -30,9 +31,7 @@ Route::get('categories/{categorySlug}/{articleSlug}', [FrontController::class,"a
 Route::get('/gallery', [FrontController::class,"gallery"])->name("front.gallery");
 
 Route::prefix('admin')->middleware("auth")->group(function () {
-    Route::get("/", function () {
-        return view("layouts.admin");
-    })->name("admin.index");
+    Route::get("/",[StatController::class,"viewStat"])->name("admin.index");
 
     Route::get("article",[ArticleController::class,"index"])->name("article.index");
     Route::post("article/change-status", [ArticleController::class, "changeStatus"])->name("article.changeStatus");
@@ -57,7 +56,8 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("gallery/list",[GalleryController::class,"index"])->name("gallery.index");
     Route::get("gallery/create",[GalleryController::class,"create"])->name("gallery.create");
     Route::post('gallery/create',[GalleryController::class,"store"]);
-    Route::post('gallery/{id}/edit',[GalleryController::class,"update"])->name('gallery.edit')->whereNumber('id');
+    Route::get('gallery/{id}/edit',[GalleryController::class,"edit"])->name('gallery.edit')->whereNumber('id');
+    Route::post('gallery/{id}/edit',[GalleryController::class,"update"])->whereNumber('id');
     Route::post('gallery/delete',[GalleryController::class,"delete"])->name("gallery.delete");
 
 

@@ -25,9 +25,9 @@
                 </div>
                 <div class="formItem">
                     <label for="image">Resim <span class="labelLitDesc">maksimum 2mb olmalıdır</span></label>
-                    <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
-                    @if (isset($category) && $category->image)
-                        <img src="{{ asset($category->image) }}" alt="" class="ListImg">
+                    <input type="file" id="image_path" name="image_path" accept="image/png, image/jpeg, image/jpg">
+                    @if (isset($gallery) && $gallery->image_path)
+                        <img src="{{ asset($gallery->image_path) }}" alt="" class="ListImg">
                     @endif
                 </div>
                 <button class="sendBtn">{{ isset($gallery) ? 'Kaydet' : 'Paylaş' }}</button>

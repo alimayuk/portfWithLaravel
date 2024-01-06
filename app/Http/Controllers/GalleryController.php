@@ -9,16 +9,18 @@ use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $gallery = Gallery::all();
-        return view('admin.gallery.list',compact("gallery"));
+        return view('admin.gallery.list', compact("gallery"));
     }
-    public function create(){
-
+    public function create()
+    {
         return view('admin.gallery.update');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if (!is_null($request->image)) {
             $imageFile = $request->file("image");
             $originalName = $imageFile->getClientOriginalName();
@@ -37,8 +39,8 @@ class GalleryController extends Controller
         if (!is_null($request->image)) {
             $data['image_path'] = $publicPath . "/" . $fileName;
         }
-        if (is_null($request->title)){
-            return redirect()->back()->withErrors(["Hata"=> "* ile işaretlenmiş olan alanları doldurun"]);
+        if (is_null($request->title)) {
+            return redirect()->back()->withErrors(["Hata" => "* ile işaretlenmiş olan alanları doldurun"]);
         }
         Gallery::create($data);
         if (!is_null($request->image)) {
@@ -48,16 +50,59 @@ class GalleryController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request){
-        $gallery = Gallery::first();
-        
+    public function edit(Request $request)
+    {
+        $gallery = Gallery::where("id", $request->id)->first();
+        return view("admin.gallery.update", compact('gallery'));
     }
-    public function post(Request $request){
+
+    public function update(Request $request)
+    {
+
+        $data = $request->except("_token");
+
+        if (!is_null($request->image_path)) {
+            $imageFile = $request->file("image_path"); //clientten gelen imageyi aldık.
+            $originalName = $imageFile->getClientOriginalName(); // noktadan önce olanı alır ve değişkene atar
+            $originalExtension = $imageFile->getClientOriginalExtension();
+            $explodoName = explode(".", $originalName)[0];
+            $fileName = Str::slug($explodoName) . "." . $originalExtension;
+            $folder = "gallery";
+            $publicPath = "Storage/" . $folder;
+
+            if (file_exists(public_path($publicPath . "/" . $fileName))) {
+                return redirect()->back()->withErrors(['image' => "görsel daha önceden yüklenmiştir."]);
+            }
+            $data['image_path'] = $publicPath . "/" . $fileName;
+        }
+
+        $galleryQuery = Gallery::query()->where("id", $request->id);
+
+        $galleryFind = $galleryQuery->first();
+
+        $galleryQuery->update($data);
+
+
+        if (!is_null($request->image_path)) {
+
+            // resimin kaldırılması
+            if (file_exists(public_path($galleryFind->image_path))) {
+                File::delete(public_path($galleryFind->image_path));
+            }
+
+            $imageFile->storeAs($folder, $fileName, "public");
+        }
+        alert()->success("başarılı", "görsel güncelleme işlemi başarılı")->showConfirmButton("TAMAM")->autoClose(5000);
+        return redirect()->route("gallery.index");
+    }
+    public function post(Request $request)
+    {
         $gallery = Gallery::first();
     }
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $galleryID = $request->id;
-        $gallery = Gallery::where("id",$galleryID)->first();
+        $gallery = Gallery::where("id", $galleryID)->first();
         // resimin kaldırılması
         if (file_exists(public_path($gallery->image_path))) {
             File::delete(public_path($gallery->image_path));
