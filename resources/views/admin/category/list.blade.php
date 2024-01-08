@@ -27,7 +27,7 @@
                         @foreach ($categories as $category)
                             <tr>
 
-                                <td><img class="listImg" src="{{asset( $category->image )}}" alt=""></td>
+                                <td><img class="listImg" src="{{isset($category->image) ? asset( $category->image) : asset( $settings->category_default_image) }}" alt=""></td>
                                 <td>{{ $category->title }}</td>
                                 <td>
                                     @if ($category->status)

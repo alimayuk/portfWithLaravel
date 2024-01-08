@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryStore;
 use App\Models\Category;
+use App\Models\create_settings;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,8 +15,8 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all()->reverse();
-
-        return view("admin.category.list", compact("categories"));
+        $settings = create_settings::first();
+        return view("admin.category.list", compact("categories","settings"));
     }
 
     public function changeStatus(Request $request)

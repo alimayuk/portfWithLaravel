@@ -28,9 +28,10 @@
                     </thead>
                     <tbody>
                         @foreach ($articles as $article)
-                            <tr>
-
-                                <td><img class="listImg" src="{{ isset($article->image) ? asset($article->image) : asset($settings->article_default_image) }}" alt=""></td>
+                            <tr class="article">
+                                <td><img class="listImg"
+                                        src="{{ isset($article->image) ? asset($article->image) : asset($settings->article_default_image) }}"
+                                        alt=""></td>
                                 <td>{{ substr($article->title, 0, 10) }}..</td>
                                 <td>{{ $article->category->title }}</td>
                                 <td>
@@ -53,11 +54,27 @@
                                     @endif
 
                                 </td>
-                                <td>{{ isset($article->seo_keywords) ? substr($article->seo_keywords, 0, 10) : "boş"}}</td>
+                                <td>{{ isset($article->seo_keywords) ? substr($article->seo_keywords, 0, 10) : 'boş' }}</td>
                                 <td>{!! substr($article->seo_description, 0, 10) !!}...</td>
-                                <td>{{ substr($article->description, 0, 25) }}...</td>
+
+                                <td>
+                                    <button class="articleShowBtn" data-makaleid="{{ $article->id }}"><i
+                                            class="fas fa-eye"></i></button>
+                                    <div class="overlayWrapper overlay_{{ $article->id }}"></div>
+                                    <div class="popup popup_{{ $article->id }}">
+                                        <div class="popupContainer">
+                                            <h2></h2>
+                                            <textarea cols="30" rows="10" value="" name="description" readonly class="makaleAciklama">{!! strip_tags($article->description) !!}</textarea>
+                                            <div class="popupBtns">
+                                                <a class="popupBtnUorS" id="updatePopup"
+                                                    data-makaleid="{{ $article->id }}">Güncelle</a>
+                                                <a id="closePopup" data-makaleid="{{ $article->id }}">Kapat</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $article->read_time }}</td>
-                                <td>{{ \Carbon\Carbon::parse($article->created_at)->format("d-m-Y") }}</td>
+                                <td>{{ \Carbon\Carbon::parse($article->created_at)->format('d-m-Y') }}</td>
                                 <td class="editColumn">
                                     <a href="{{ route('article.edit', ['id' => $article->id]) }}" class="btn"><i
                                             class="far fa-edit"></i></a>
@@ -80,6 +97,65 @@
 @section('js')
     <script>
         $(document).ready(function() {
+
+            $('.article').on('click', '.articleShowBtn', function() {
+                var makaleID = $(this).data('makaleid');
+                var makaleAciklama = $(this).closest('.article').find('.makaleAciklama').text();
+                $(".popup h2").text("Makale İçeriği");
+                $(".popup textarea").val(makaleAciklama);
+                $(".overlay_" + makaleID).fadeIn();
+                $(".popup_" + makaleID).fadeIn();
+            });
+
+            $('.article').on('click', '#closePopup', function() {
+                var makaleID = $(this).data('makaleid');
+                $(".overlayWrapper").fadeOut();
+                $(".popup").fadeOut();
+            });
+
+            $('.article').on('click', '#updatePopup', function() {
+                var makaleID = $(this).data('makaleid');
+                var popupContainer = $(".popup_" + makaleID);
+                var textarea = popupContainer.find('.makaleAciklama');
+                textarea.removeAttr('readonly');
+
+                var updateBtn = popupContainer.find('#updatePopup');
+                updateBtn.text('Kaydet').attr('id', 'savePopup');
+            });
+
+            $('.article').on('click', '#savePopup', function() {
+                var id = $(this).data('makaleid');
+                var popupContainer = $(".popup_" + id);
+                var textarea = popupContainer.find('.makaleAciklama');
+                var currentDescription = textarea.val();
+                textarea.attr('readonly', true);
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('admin/article') }}/" + id + "/edit",
+                    data: {
+                        id: id,
+                        description: currentDescription
+                    },
+                    success: function(data) {
+                        var newDescription = $('.makaleAciklama').val();
+                        $('.makaleAciklama').val(data.new_description);
+                        Swal.fire({
+                            title: "Güncelleme Başarılı",
+                            confirmButtonText: "Tamam",
+                            icon: "success",
+                        });
+                    },
+                    error: function() {
+                        console.log("Hata geldi");
+                    }
+                });
+                var saveBtn = popupContainer.find('#savePopup');
+                saveBtn.text('Güncelle').attr('id', 'updatePopup');
+            });
+
+
+
+
             $('.btnChangeStatus').click(function() {
                 let articleID = $(this).data('id');
                 $('#inputStatus').val(articleID);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleFastRequest;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
@@ -143,6 +144,15 @@ class ArticleController extends Controller
         }
         alert()->success("başarılı", "makala güncelleme işlemi başarılı")->showConfirmButton("TAMAM")->autoClose(5000);
         return redirect()->route("article.index");
+    }
+
+    public function fastUpdate(Request $request){
+        $data = $request->except("_token");
+        $data["user_id"] = auth()->id();
+        $articleQuery = Article::query()->where("id", $request->id);
+        $articleQuery->update($data);
+        $newDescription = $request->input('description');
+        return response()->json(['new_description' => $newDescription]);
     }
     public function changeStatus(Request $request){
         $request->validate(['id' => ["required", "integer"]]);

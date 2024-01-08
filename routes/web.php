@@ -42,6 +42,8 @@ Route::prefix('admin')->middleware("auth")->group(function () {
     ->whereNumber('id');
     Route::post("article/{id}/edit",[ArticleController::class,"update"])
     ->whereNumber('id');
+    Route::post("article/{id}/edit",[ArticleController::class,"fastUpdate"])->name("article.edit")
+    ->whereNumber('id');
     Route::post('article/delete',[ArticleController::class,"delete"])->name("article.delete");
 
     Route::get("categories",[CategoryController::class,"index"])->name("category.index");
