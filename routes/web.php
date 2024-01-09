@@ -32,6 +32,9 @@ Route::get('/gallery', [FrontController::class,"gallery"])->name("front.gallery"
 
 Route::prefix('admin')->middleware("auth")->group(function () {
     Route::get("/",[StatController::class,"viewStat"])->name("admin.index");
+    Route::post('/',[StatController::class,'goalCreate'])->name('goal.create');
+    Route::post('goal/delete',[StatController::class,"delete"])->name("goal.delete");
+
 
     Route::get("article",[ArticleController::class,"index"])->name("article.index");
     Route::post("article/change-status", [ArticleController::class, "changeStatus"])->name("article.changeStatus");

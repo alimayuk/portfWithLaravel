@@ -153,9 +153,6 @@
                 saveBtn.text('Güncelle').attr('id', 'updatePopup');
             });
 
-
-
-
             $('.btnChangeStatus').click(function() {
                 let articleID = $(this).data('id');
                 $('#inputStatus').val(articleID);

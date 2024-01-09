@@ -1,19 +1,44 @@
-* {
-    margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+*{
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.container {
+:root{
+    --color-white0: #fff;
+    --color-white1: #F3F3F9;
+    --color-white3: #AAADB7;
+
+    --color-black0: #000;
+    --color-black1: #495057;
+    
+    --color-green1:#0AB39C;
+    --color-green2:#DAF4F0;
+    --color-green3:#0AB39C;
+
+
+    --color-red0:#F06548;
+
+    --color-orange0: #FAB005 ;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style-type:none ;
+}
+
+.container{
     max-width: 1280px;
     margin: 0 auto;
+    padding: 0px 10px;
 }
 
-ul {
-    list-style-type: none;
-}
-
-a {
-    text-decoration: none;
+.adminPage{
+    background-color: var(--color-white1);
 }
