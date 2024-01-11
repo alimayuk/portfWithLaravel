@@ -15,19 +15,22 @@ use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $users = User::all();
         $articles = Article::all()->reverse();
         $settings = create_settings::first();
-        return view("admin.article.list",compact("articles","categories","users","settings"));
+        return view("admin.article.list", compact("articles", "categories", "users", "settings"));
     }
-    public function create(){
+    public function create()
+    {
         $categories = Category::all();
-        return view("admin.article.create-update",compact("categories"));
+        return view("admin.article.create-update", compact("categories"));
     }
 
-    public function edit(Request $request, int $articleID){
+    public function edit(Request $request, int $articleID)
+    {
         $categories = Category::all();
         $users = User::all();
         $article = Article::query()->where("id", $articleID)->first();
@@ -41,18 +44,19 @@ class ArticleController extends Controller
         return view("admin.article.create-update", compact("article", "categories", "users"));
     }
 
-    public function store(Request $request){
-        if(!is_null($request->image)){
+    public function store(Request $request)
+    {
+        if (!is_null($request->image)) {
             $imageFile = $request->file("image"); //clientten gelen imageyi aldık.
-        $originalName = $imageFile->getClientOriginalName(); // noktadan önce olanı alır ve değişkene atar
-        $originalExtension = $imageFile->getClientOriginalExtension();
-        $explodoName = explode(".", $originalName)[0];
-        $fileName = Str::slug($explodoName) . "." . $originalExtension;
-        $folder = "articles";
-        $publicPath = "Storage/" . $folder;
-        if (file_exists(public_path($publicPath . "/" . $fileName))) {
-            return redirect()->back()->withErrors(['image' => "görsel daha önceden yüklenmiştir."]);
-        }
+            $originalName = $imageFile->getClientOriginalName(); // noktadan önce olanı alır ve değişkene atar
+            $originalExtension = $imageFile->getClientOriginalExtension();
+            $explodoName = explode(".", $originalName)[0];
+            $fileName = Str::slug($explodoName) . "." . $originalExtension;
+            $folder = "articles";
+            $publicPath = "Storage/" . $folder;
+            if (file_exists(public_path($publicPath . "/" . $fileName))) {
+                return redirect()->back()->withErrors(['image' => "görsel daha önceden yüklenmiştir."]);
+            }
         }
 
         $data = $request->except("_token");
@@ -71,27 +75,27 @@ class ArticleController extends Controller
         }
 
         $data['slug'] = $slug;
-        if(!is_null($request->image)){
+        if (!is_null($request->image)) {
             $data['image'] = $publicPath . "/" . $fileName;
         }
 
         if (is_null($request->description) || is_null($request->title) || is_null($request->category_id)) {
-            return redirect()->back()->withErrors(["Hata"=> "* ile işaretlenmiş olan alanları doldurun"]);
+            return redirect()->back()->withErrors(["Hata" => "* ile işaretlenmiş olan alanları doldurun"]);
         }
-        
+
         $data["user_id"] = auth()->id();
         Article::create($data);
 
-        if(!is_null($request->image)){
+        if (!is_null($request->image)) {
             $imageFile->storeAs($folder, $fileName, "public");
         }
 
         alert()->success("başarılı", "makala yükleme işlemi başarılı")->showConfirmButton("TAMAM")->autoClose(5000);
         return redirect()->back();
-
     }
 
-    public function update(ArticleRequest $request){
+    public function update(ArticleRequest $request)
+    {
         $data = $request->except("_token");
         $slug = $data['slug'] ?? $data['title'];  // datanın slugu varsa onu al yoksa title al
         $slug = Str::slug($slug);
@@ -146,7 +150,8 @@ class ArticleController extends Controller
         return redirect()->route("article.index");
     }
 
-    public function fastUpdate(Request $request){
+    public function fastUpdate(Request $request)
+    {
         $data = $request->except("_token");
         $data["user_id"] = auth()->id();
         $articleQuery = Article::query()->where("id", $request->id);
@@ -154,22 +159,24 @@ class ArticleController extends Controller
         $newDescription = $request->input('description');
         return response()->json(['new_description' => $newDescription]);
     }
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $request->validate(['id' => ["required", "integer"]]);
         $articleID = $request->id;
-        $article = Article::where("id",$articleID)->first();
+        $article = Article::where("id", $articleID)->first();
         $article->status = !$article->status;
         $article->save();
-        alert('Başarılı', "Değişikli Başarılı","success");
+        alert('Başarılı', "Değişikli Başarılı", "success");
         return redirect()->back();
     }
-    public function changeFeatureStatus(Request $request){
+    public function changeFeatureStatus(Request $request)
+    {
         $request->validate(['id' => ["required", "integer"]]);
         $articleID = $request->id;
-        $article = Article::where("id",$articleID)->first();
+        $article = Article::where("id", $articleID)->first();
         $article->feature_status = !$article->feature_status;
         $article->save();
-        alert('Başarılı', "Değişikli Başarılı","success");
+        alert('Başarılı', "Değişikli Başarılı", "success");
         return redirect()->back();
     }
 

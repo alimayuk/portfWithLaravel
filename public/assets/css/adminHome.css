@@ -340,5 +340,41 @@ p[data-value]:after {
     padding: 10px 20px;
 }
 
+#goalTarget{
+    background:transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    width: min-content;
+    appearance: none;
+}
+.progressGoalNumber{
+    background:transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    width: 50px; 
+}
 
+select:disabled{
+    color: black;
+}
+
+.gallery .itemWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gallery .littleImg {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    transition: all ease .4s;
+}
+
+.gallery .littleImg:hover {
+    scale: 1.05;
+}
 

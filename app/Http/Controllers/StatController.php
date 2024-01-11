@@ -29,7 +29,19 @@ class StatController extends Controller
 
         $this->updateGoals($goals, $results, $currentDate);
 
-        return view('admin.home', compact('articlesView', 'totalView', 'gallery', 'goals'));
+        $totalArticlesUntilToday = Article::where('created_at', '<=', $currentDate)->count();
+        $last30DaysArticles = Article::where('created_at', '>', $currentDate->subDays(30))->count();
+        $ratio = ($totalArticlesUntilToday > 0) ? ($last30DaysArticles / $totalArticlesUntilToday) * 100 : 0;
+        
+        $last30DaysViewArticles = Article::where('created_at', '>', $currentDate->subDays(30))->sum('view_count');
+        $totalViewRatio = ($totalView > 0) ? ($last30DaysArticles / $totalView) * 100 : 0;
+
+        $totalCategoryUntilToday = Category::where('created_at', '<=', $currentDate)->count();
+        $last30DaysCategory = Category::where('created_at', '>', $currentDate->subDays(30))->count();
+        $ratioCategory = ($totalCategoryUntilToday > 0) ? ($last30DaysCategory / $totalCategory) * 100 : 0;
+        
+
+        return view('admin.home', compact('articlesView', 'totalView', 'gallery', 'goals', "totalCategory", "totalArticle", "ratio","ratioCategory","totalViewRatio"));
     }
 
     private function calculateResults($goals, $totalArticle, $totalCategory, $totalView)
@@ -72,28 +84,29 @@ class StatController extends Controller
             $goal->result = $results[$goal->id] ?? null;
         }
     }
+    
     public function goalCreate(Request $request)
     {
+        $validatedData = $request->validate([
+            'process_id' => 'required|integer',
+            ]);
         $data = $request->except("_token");
-        $processId = $data['process_id'];
+        // $processId = $data['process_id'];
+        $data['title'] = $this->getGoalTitle($validatedData['process_id']);
 
-        switch ($processId) {
-            case 1:
-                $data['title'] = 'Blog Sayısı';
-                break;
-            case 2:
-                $data['title'] = 'Kategori Sayısı';
-                break;
-            case 3:
-                $data['title'] = 'Toplam Okunma Sayısı';
-                break;
-            default:
-                $data['title'] = 'Belirsiz';
-                break;
-        }
         Goal::create($data);
         alert()->success("başarılı", "Hedef başarıyla oluşturuldu.")->showConfirmButton("TAMAM")->autoClose(5000);
         return redirect()->back();
+    }
+
+    private function getGoalTitle($processId)
+    {
+        $titles = [
+            1 => 'Blog Sayısı',
+            2 => 'Kategori Sayısı',
+            3 => 'Toplam Okunma Sayısı',
+        ];
+        return $titles[$processId] ?? 'Belirsiz';
     }
 
     public function delete(Request $request)
@@ -107,4 +120,14 @@ class StatController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request)
+    {
+        $data = $request->except("_token");
+        $processId = $data['process_id'];
+        $data['title'] = $this->getGoalTitle($processId);
+        $goalQuery = Goal::query()->where("id", $request->id);
+        $goalQuery->update($data);
+        alert()->success("başarılı", "makala güncelleme işlemi başarılı")->showConfirmButton("TAMAM")->autoClose(5000);
+        return redirect()->back();
+    }
 }

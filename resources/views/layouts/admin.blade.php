@@ -25,12 +25,12 @@
         <div class="closeBtn"><i class="fas fa-times"></i></div>
         <div class="menu">
             <div class="item"><a href="{{ route("admin.index") }}">
-                <i class="fas fa-tachometer-alt"></i>Anasayfa</a>
+                Anasayfa<i class="fas fa-tachometer-alt itemIcon"></i></a>
             </div>
 
             <div class="item">
                 <a class="subBtn">
-                    <i class="far fa-plus-square"></i>Makale<i class="fas fa-arrow-right dropdown"></i>
+                    <i class="fas fa-arrow-right dropdown"></i>Makale<i class="far fa-plus-square itemIcon"></i>
                 </a>
                 <div class="subMenu">
                     <a href="{{ route('article.index') }}" class="subItem">Makale Listesi</a>
@@ -38,26 +38,27 @@
                 </div>
             </div>
             <div class="item">
-                <a class="subBtn"><i class="fas fa-ellipsis-v"></i></i>Kategori <i
-                        class="fas fa-arrow-right dropdown"></i></a>
+                <a class="subBtn"><i
+                    class="fas fa-arrow-right dropdown"></i>Kategori<i class="fa-solid fa-layer-group itemIcon"></i></i></a>
                 <div class="subMenu">
                     <a href="{{ route('category.index') }}" class="subItem">Kategori Listesi</a>
                     <a href="{{ route('category.create') }}" class="subItem">Kategori Oluştur</a>
                 </div>
             </div>
             <div class="item">
-                <a class="subBtn"><i class="fas fa-ellipsis-v"></i></i>Galeri <i
-                        class="fas fa-arrow-right dropdown"></i></a>
+                <a class="subBtn"><i
+                    class="fas fa-arrow-right dropdown"></i>Galeri<i class="fa-solid fa-images itemIcon"></i>
+                </a>
                 <div class="subMenu">
                     <a href="{{ route('gallery.index') }}" class="subItem">Görsel Listesi</a>
                     <a href="{{ route('gallery.create') }}" class="subItem">Görsel Yükle</a>
                 </div>
             </div>
             <div class="item">
-                <a href="{{ route('settings') }}"><i class="fas fa-cog"></i>Ayarlar</a>
+                <a href="{{ route('settings') }}">Ayarlar<i class="fas fa-cog itemIcon"></i></a>
             </div>
             <div class="item">
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Çıkış Yap</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Çıkış Yap<i class="fas fa-sign-out-alt itemIcon"></i></a>
                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
                     @csrf
                 </form>

@@ -47,10 +47,12 @@ left: 0;
 .sideBar .menu .item i{
     margin-right: 15px; 
 }
-.sideBar .menu .item a .dropdown{
+.sideBar .menu .item a .itemIcon{
     position: absolute;
-    right: 0;
+    right: 8px;
     margin: 20px;
+}
+.sideBar .menu .item a .dropdown{
     transition:  .3s ease;
 }
 .sideBar .menu .item .subMenu{
